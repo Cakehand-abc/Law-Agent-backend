@@ -21,3 +21,39 @@ rad.json
 *.flf
 #Test results file
 TestResults.xml
+
+### Python / FastAPI ###
+# 环境与密钥
+.env
+.env.local
+.env.*.local
+
+# 虚拟环境
+venv/
+.venv/
+env/
+
+# 字节码与缓存
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# IDE（.vscode/ 已在 AL 段声明）
+.idea/
+
+# 操作系统
+.DS_Store
+Thumbs.db
+
+# 构建产物
+*.egg-info/
+dist/
+build/
+*.egg
+
+# 日志
+*.log
