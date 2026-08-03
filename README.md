@@ -20,7 +20,7 @@
 E:\UGit\Law-Agent-backend\
 ├── app/
 │   ├── __init__.py
-│   ├── main.py             # FastAPI 应用入口，挂载全局件与 Prometheus 监控
+│   ├── main.py             # FastAPI 应用入口，挂载全局中间件与 Prometheus 监控
 │   ├── core/               # 基础核心配置
 │   │   ├── config.py       # Pydantic-settings 动态加载环境变量 (.env)
 │   │   ├── database.py     # SQLAlchemy 异步引擎及 Session 纳管
@@ -49,6 +49,16 @@ E:\UGit\Law-Agent-backend\
 │       ├── metrics.py      # 本地 Token 计量折算器 (室友 B 协助)
 │       ├── pdf_generator.py# weasyprint 异步 PDF 水印渲染
 │       └── notification.py # WebSocket 站内弹窗与异步 SMTP 告警 (室友 A/B 负责)
+├── tests/                  # 单元测试与集成测试目录
+│   ├── __init__.py
+│   ├── conftest.py          # Pytest 全局 Fixture 配置 (Mock Client & Auth 注入)
+│   ├── test_main.py         # 基础入口测试
+│   ├── routers/             # 路由接口层测试
+│   │   ├── __init__.py
+│   │   └── test_contracts.py# 合同上传及敏感词防护边界测试
+│   └── services/            # 核心业务逻辑层测试
+│       ├── __init__.py
+│       └── test_extractor.py# Markdown 切片与文本提取测试
 ├── .env.example            # 配置样板
 ├── requirements.txt        # 依赖清单
 └── README.md
@@ -112,3 +122,25 @@ copy .env.example .env
 uvicorn app.main:app --reload --port 8000
 ```
 启动后可访问 Swagger API 交互式文档: [http://localhost:8000/docs](http://localhost:8000/docs)
+
+---
+
+## 🧪 运行单元测试
+
+项目集成了 `pytest` 自动化测试框架，支持对服务层（Services）和路由层（Routers）进行快速的接口边界和算法边界测试。
+
+### 1. 确保安装了开发与测试依赖
+```bash
+pip install -r requirements.txt
+```
+
+### 2. 运行所有单元测试
+在项目根目录下执行：
+```bash
+pytest
+```
+
+### 3. 运行测试并输出覆盖率报告
+```bash
+pytest --cov=app tests/
+```

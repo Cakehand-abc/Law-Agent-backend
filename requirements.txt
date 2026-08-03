@@ -23,3 +23,8 @@ loguru>=0.7.2
 prometheus-fastapi-instrumentator>=6.1.0
 networkx>=3.0
 python-dotenv>=1.0.0
+
+# Testing & Development
+pytest>=8.0.0
+pytest-asyncio>=0.23.0
+pytest-cov>=4.1.0
